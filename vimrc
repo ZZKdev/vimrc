@@ -144,7 +144,7 @@ let g:ycm_min_num_of_chars_for_completion=1
 let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_gobal_extra_conf='~/.vim/bundle/YoucompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf'
+let g:ycm_gobal_extra_conf='~/.ycm_extra_conf.py'
 
 " 定义快捷键
 " 定义代码跳转快捷键
