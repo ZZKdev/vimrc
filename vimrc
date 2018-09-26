@@ -29,6 +29,23 @@ set wildmenu
 set ignorecase
 " 快捷键前缀
 let mapleader=";"
+" 显示相对行号
+" 一开始不显示相对行号
+set nu
+augroup relative_numbser
+    autocmd!
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
+augroup END
+" 使编辑行始终居中
+nnoremap j jzz
+nnoremap k kzz
+" 关闭出错声音
+set noerrorbells
+" 出错时发出视觉提示
+set visualbell
+
+
 
 " 开启语法高亮
 syntax enable
@@ -62,8 +79,6 @@ Plugin 'rakr/vim-one'
 Plugin 'Lokaltog/vim-powerline'
 " 缩进可视化插件
 Plugin 'nathanaelkane/vim-indent-guides'
-" 代码跳转插件
-Plugin 'derekwyatt/vim-fswitch'
 " 注释插件 <leader>cc注释 cu取消注释
 Plugin 'scrooloose/nerdcommenter'
 " 代码补全插件
@@ -145,11 +160,13 @@ let g:ycm_cache_omnifunc=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_gobal_extra_conf='~/.ycm_extra_conf.py'
+let g:ycm_goto_buffer_command='vertical-split'
+nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
 " 定义快捷键
 " 定义代码跳转快捷键
-nmap <silent> <Leader>sw :FSHere<cr>
 nmap LB 0
 nmap LE $
 imap jj <ESC>
 inoremap <leader>; <C-x><C-o>
+
