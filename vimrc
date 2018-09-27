@@ -44,6 +44,8 @@ nnoremap k kzz
 set noerrorbells
 " 出错时发出视觉提示
 set visualbell
+" 启用256色
+set t_Co=256
 
 
 
@@ -77,6 +79,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'rakr/vim-one'
 " 状态栏插件
 Plugin 'Lokaltog/vim-powerline'
+" 缓冲区插件
+Plugin 'fholgado/minibufexpl.vim'
 " 缩进可视化插件
 Plugin 'nathanaelkane/vim-indent-guides'
 " 注释插件 <leader>cc注释 cu取消注释
@@ -115,6 +119,21 @@ set number
 set cursorline
 " 高亮显示搜索结果
 set hlsearch
+
+" 缓冲区插件配置
+set hidden " 必须保存修改后才能跳转buffer
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bf<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 
 " 缩进可视化插件配置
 let g:indent_guides_enable_on_vim_startup=1
