@@ -37,9 +37,9 @@ augroup relative_numbser
     autocmd InsertEnter * :set norelativenumber
     autocmd InsertLeave * :set relativenumber
 augroup END
-" 使编辑行始终居中
-nnoremap j jzz
-nnoremap k kzz
+" 使编辑行始终居中 有缺陷
+" nnoremap j jzz
+" nnoremap k kzz
 " 关闭出错声音
 set noerrorbells
 " 出错时发出视觉提示
@@ -81,12 +81,8 @@ Plugin 'rakr/vim-one'
 Plugin 'Lokaltog/vim-powerline'
 " 缓冲区插件
 Plugin 'fholgado/minibufexpl.vim'
-" 缩进可视化插件
-Plugin 'nathanaelkane/vim-indent-guides'
 " 注释插件 <leader>cc注释 cu取消注释
 Plugin 'scrooloose/nerdcommenter'
-" 代码补全插件
-Plugin 'Valloric/YoucompleteMe'
 " 工程文件遊廊插件
 Plugin 'scrooloose/nerdtree'
 call vundle#end()
@@ -136,9 +132,9 @@ nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
 
 " 缩进可视化插件配置
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
+" let g:indent_guides_enable_on_vim_startup=1
+" let g:indent_guides_start_level=2
+" let g:indent_guides_guide_size=1
 
 " 代码折叠配置 za打开或关闭折叠 zM关闭所有折叠 zR打开所有折叠
 " 基于缩进或语法进行折叠
@@ -165,27 +161,29 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " YCM配置
 " 补全在注释中有效
-let g:ycm_complete_in_comments=1
-" 允许vim加载.ycm_extra_conf.py文件，不再提示
-let g:ycm_confirm_extra_conf=0
-" 开启YCM标签补全引擎
-let g:ycm_collect_identifiers_from_tags_files=1
-" 引入c++标准库标签
-set tags+=/usr/include/c++/8.2.1/stdcpp.tags
-" 从键入第一个字符就开始补全
-let g:ycm_min_num_of_chars_for_completion=1
-" 禁止缓存匹配项，每次都重新生成匹配项
-let g:ycm_cache_omnifunc=0
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_gobal_extra_conf='~/.ycm_extra_conf.py'
-let g:ycm_goto_buffer_command='vertical-split'
-nnoremap <Leader>g :YcmCompleter GoTo<CR>
+" let g:ycm_complete_in_comments=1
+" " 允许vim加载.ycm_extra_conf.py文件，不再提示
+" let g:ycm_confirm_extra_conf=0
+" " 开启YCM标签补全引擎
+" let g:ycm_collect_identifiers_from_tags_files=1
+" " 引入c++标准库标签
+" set tags+=/usr/include/c++/8.2.1/stdcpp.tags
+" " 从键入第一个字符就开始补全
+" let g:ycm_min_num_of_chars_for_completion=1
+" " 禁止缓存匹配项，每次都重新生成匹配项
+" let g:ycm_cache_omnifunc=0
+" " 语法关键字补全
+" let g:ycm_seed_identifiers_with_syntax=1
+" let g:ycm_gobal_extra_conf='~/.ycm_extra_conf.py'
+" let g:ycm_goto_buffer_command='vertical-split'
+" nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
 " 定义快捷键
 " 定义代码跳转快捷键
-nmap LB 0
-nmap LE $
-imap jj <ESC>
+" nmap LB 0
+" nmap LE $
+" imap jj <ESC>
 inoremap <leader>; <C-x><C-o>
 
+" 设置透明
+hi Normal ctermbg=none
