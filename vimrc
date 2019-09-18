@@ -27,8 +27,6 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 set wildmenu
 " 搜索时大小写不敏感
 set ignorecase
-" 快捷键前缀
-let mapleader=";"
 " 显示相对行号
 " 一开始不显示相对行号
 set nu
@@ -67,27 +65,45 @@ set shiftwidth=4
 set softtabstop=4
 
 
-" vundle 环境设置
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/plugged')
 " 配色插件
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'morhetz/gruvbox'
-Plugin 'rakr/vim-one'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
 " 状态栏插件
-Plugin 'Lokaltog/vim-powerline'
+Plug 'Lokaltog/vim-powerline'
 " 缓冲区插件
-Plugin 'fholgado/minibufexpl.vim'
+Plug 'fholgado/minibufexpl.vim'
 " 注释插件 <leader>cc注释 cu取消注释
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " 工程文件遊廊插件
-Plugin 'scrooloose/nerdtree'
-call vundle#end()
-" 根据侦测到的不同类型加载对应的插件
-filetype plugin on
+Plug 'scrooloose/nerdtree'
+" vim-go
+Plug 'fatih/vim-go', {'do': 'GoUpdateBinaries'} 
+"go-补全
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+call plug#end()
+
+" 补全设置
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ deoplete#manual_complete()
+		function! s:check_back_space() abort "{{{
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~ '\s'
+		endfunction"}}}
+
 
 
 " 配色方案设置
@@ -149,7 +165,7 @@ nmap <Leader>fl :NERDTreeToggle<CR>
 " 设置子窗口宽度
 let NERDTreeWinSize=32
 " 设置子窗口位置
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 " 显示隐藏文件
 let NERDTreeShowHidden=1
 " 不显示冗余帮助信息
@@ -158,25 +174,6 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
-" YCM配置
-" 补全在注释中有效
-" let g:ycm_complete_in_comments=1
-" " 允许vim加载.ycm_extra_conf.py文件，不再提示
-" let g:ycm_confirm_extra_conf=0
-" " 开启YCM标签补全引擎
-" let g:ycm_collect_identifiers_from_tags_files=1
-" " 引入c++标准库标签
-" set tags+=/usr/include/c++/8.2.1/stdcpp.tags
-" " 从键入第一个字符就开始补全
-" let g:ycm_min_num_of_chars_for_completion=1
-" " 禁止缓存匹配项，每次都重新生成匹配项
-" let g:ycm_cache_omnifunc=0
-" " 语法关键字补全
-" let g:ycm_seed_identifiers_with_syntax=1
-" let g:ycm_gobal_extra_conf='~/.ycm_extra_conf.py'
-" let g:ycm_goto_buffer_command='vertical-split'
-" nnoremap <Leader>g :YcmCompleter GoTo<CR>
 
 " 定义快捷键
 " 定义代码跳转快捷键
@@ -187,3 +184,16 @@ inoremap <leader>; <C-x><C-o>
 
 " 设置透明
 hi Normal ctermbg=none
+
+
+
+" 设置无效
+inoremap <BS> <Nop>
+nmap <Up>        <Nop>
+nmap <Down>      <Nop>
+nmap <Left>      <Nop>
+nmap <Right>     <Nop>
+imap <Up>        <Nop>
+imap <Down>      <Nop>
+imap <Left>      <Nop>
+imap <Right>     <Nop>
